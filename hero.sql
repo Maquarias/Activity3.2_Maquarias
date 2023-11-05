@@ -243,3 +243,10 @@ SELECT hero_name
 FROM public.hero
 WHERE class_id = (SELECT class_id FROM public.class WHERE class_name = 'Archer');
 
+-- Retrieve the average player level for each class, arranged in descending order.
+SELECT c.class_name, AVG(p.player_level) as avg_player_level
+FROM public.class c
+JOIN public.hero h ON c.class_id = h.class_id
+JOIN public.player p ON h.hero_id = p.hero_id
+GROUP BY c.class_name
+ORDER BY avg_player_level DESC;
